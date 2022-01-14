@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="1.8">
       <module name="DotaHeroes.app" target="11" />
       <module name="DotaHeroes.buildSrc" target="11" />
       <module name="DotaHeroes.components" target="11" />
-      <module name="DotaHeroes.hero.hero-datasource" target="1.8" />
-      <module name="DotaHeroes.hero.hero-datasource-test" target="1.8" />
-      <module name="DotaHeroes.hero.hero-domain" target="1.8" />
-      <module name="DotaHeroes.hero.hero-interactors" target="1.8" />
       <module name="DotaHeroes.hero.ui-heroDetail" target="11" />
       <module name="DotaHeroes.hero.ui-herolist" target="11" />
     </bytecodeTargetLevel>
