@@ -2,7 +2,7 @@ package ru.aasmc.core
 
 class Logger(
     private val tag: String,
-    private val isDebug: Boolean
+    private val isDebug: Boolean = true
 ) {
     fun log(msg: String) {
         if (!isDebug) {

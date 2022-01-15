@@ -41,6 +41,10 @@ android {
 }
 
 dependencies{
+    implementation(project(Modules.core))
+    implementation(project(Modules.heroDomain))
+    implementation(project(Modules.heroInteractors))
+
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
