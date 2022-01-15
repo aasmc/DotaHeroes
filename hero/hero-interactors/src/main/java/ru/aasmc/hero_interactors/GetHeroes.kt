@@ -5,18 +5,17 @@ import kotlinx.coroutines.flow.flow
 import ru.aasmc.core.DataState
 import ru.aasmc.core.ProgressBarState
 import ru.aasmc.core.UIComponent
+import ru.aasmc.hero_datasource.cache.HeroCache
 import ru.aasmc.hero_datasource.network.HeroService
 import ru.aasmc.hero_domain.Hero
 
 class GetHeroes(
     private val service: HeroService,
-    // TODO add caching
+    private val cache: HeroCache
 ) {
 
     /**
-     * TODO get rid of nested try catches! And look that it emits
-     * empty list regardless of the network error.
-     * Try to use Flow.catch
+     * TODO get rid of nested try catches!
      */
     fun execute(): Flow<DataState<List<Hero>>> = flow {
         try {
@@ -40,8 +39,13 @@ class GetHeroes(
                 emptyList()
             }
 
+            // cache the network data
+            cache.insert(heroes)
+
+            // emit data from cache
+            val cachedHeroes = cache.selectAll()
             emit(
-                DataState.Data(heroes)
+                DataState.Data(cachedHeroes)
             )
 
         } catch (e: Exception) {
@@ -59,3 +63,18 @@ class GetHeroes(
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
