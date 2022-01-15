@@ -50,6 +50,8 @@ dependencies{
     implementation(AndroidX.appCompat)
     implementation(AndroidX.lifecycleVmKtx)
 
+    implementation(Coil.coil)
+
     implementation(Compose.activity)
     implementation(Compose.ui)
     implementation(Compose.material)

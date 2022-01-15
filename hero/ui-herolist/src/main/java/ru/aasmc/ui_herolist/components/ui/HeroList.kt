@@ -8,12 +8,14 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import coil.ImageLoader
 import ru.aasmc.core.ProgressBarState
 import ru.aasmc.ui_herolist.components.ui.HeroListItem
 
 @Composable
 fun HeroList(
     state: HeroListState,
+    imageLoader: ImageLoader
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -21,7 +23,8 @@ fun HeroList(
         LazyColumn {
             items(state.heroes) { hero ->
                 HeroListItem(
-                    hero = hero
+                    hero = hero,
+                    imageLoader = imageLoader
                 )
             }
         }
