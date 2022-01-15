@@ -1,7 +1,7 @@
 // kotlin/java library build.gradle
 
 apply plugin: 'java-library'
-apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'kotlin'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
