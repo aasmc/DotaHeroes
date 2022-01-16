@@ -27,7 +27,15 @@ class HeroListViewModel @Inject constructor(
 
 
     init {
-        getHeroes()
+        onTriggerEvent(HeroListEvents.GetHeroesEvent)
+    }
+
+    fun onTriggerEvent(heroListEvents: HeroListEvents) {
+        when (heroListEvents) {
+            HeroListEvents.GetHeroesEvent -> {
+                getHeroes()
+            }
+        }
     }
 
     private fun getHeroes() {
