@@ -1,4 +1,4 @@
-package ru.aasmc.ui_herolist
+package ru.aasmc.ui_herolist.ui
 
 import ru.aasmc.core.ProgressBarState
 import ru.aasmc.hero_domain.Hero

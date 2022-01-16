@@ -1,4 +1,4 @@
-package ru.aasmc.ui_herolist.components.ui
+package ru.aasmc.ui_herolist.ui.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.rememberImagePainter
 import ru.aasmc.hero_domain.Hero
-import ru.aasmc.ui_herolist.components.ui.test.TAG_HERO_NAME
-import ru.aasmc.ui_herolist.components.ui.test.TAG_HERO_PRIMARY_ATTRIBUTE
+import ru.aasmc.ui_herolist.ui.test.TAG_HERO_NAME
+import ru.aasmc.ui_herolist.ui.test.TAG_HERO_PRIMARY_ATTRIBUTE
 import kotlin.math.round
 import ru.aasmc.ui_herolist.R
 

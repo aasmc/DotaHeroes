@@ -1,4 +1,4 @@
-package ru.aasmc.ui_herolist.components.ui.test
+package ru.aasmc.ui_herolist.ui.test
 
 const val TAG_HERO_SEARCH_BAR = "TAG_HERO_SEARCH_BAR"
 const val TAG_HERO_NAME = "TAG_HERO_NAME"

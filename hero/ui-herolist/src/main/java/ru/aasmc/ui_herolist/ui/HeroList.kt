@@ -10,7 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
 import ru.aasmc.core.ProgressBarState
-import ru.aasmc.ui_herolist.components.ui.HeroListItem
+import ru.aasmc.ui_herolist.ui.HeroListState
+import ru.aasmc.ui_herolist.ui.ui.HeroListItem
 
 @Composable
 fun HeroList(
