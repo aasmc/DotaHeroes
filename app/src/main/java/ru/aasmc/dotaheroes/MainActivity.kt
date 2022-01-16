@@ -22,21 +22,16 @@ import ru.aasmc.hero_interactors.HeroInteractors
 import ru.aasmc.ui_herolist.HeroList
 import ru.aasmc.ui_herolist.ui.HeroListState
 import ru.aasmc.ui_herolist.ui.HeroListViewModel
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        imageLoader = ImageLoader.Builder(applicationContext)
-            .error(R.drawable.error_image)
-            .placeholder(R.drawable.white_background)
-            .availableMemoryPercentage(.25)
-            .crossfade(true)
-            .build()
 
         setContent {
             DotaHeroesTheme {

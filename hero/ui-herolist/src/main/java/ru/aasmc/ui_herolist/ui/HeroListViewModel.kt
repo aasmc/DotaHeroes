@@ -12,15 +12,17 @@ import ru.aasmc.core.DataState
 import ru.aasmc.core.Logger
 import ru.aasmc.core.UIComponent
 import ru.aasmc.hero_interactors.GetHeroes
+import ru.aasmc.ui_herolist.di.HERO_LIST_LOGGER
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class HeroListViewModel @Inject constructor(
     private val getHeroes: GetHeroes,
+    @Named(HERO_LIST_LOGGER) private val logger: Logger,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val logger = Logger("HeroListViewModel")
     val state: MutableState<HeroListState> = mutableStateOf(HeroListState())
 
 
