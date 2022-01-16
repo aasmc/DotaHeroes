@@ -5,8 +5,8 @@ import ru.aasmc.hero_datasource.cache.HeroCache
 import ru.aasmc.hero_datasource.network.HeroService
 
 data class HeroInteractors(
-    val getHeroes: GetHeroes
-    // TODO add other hero interactors
+    val getHeroes: GetHeroes,
+    val getHeroFromCache: GetHeroFromCache
 ) {
     companion object Factory {
         fun build(
@@ -19,6 +19,9 @@ data class HeroInteractors(
             return HeroInteractors(
                 getHeroes = GetHeroes(
                     service = service,
+                    cache = cache
+                ),
+                getHeroFromCache = GetHeroFromCache(
                     cache = cache
                 )
             )
