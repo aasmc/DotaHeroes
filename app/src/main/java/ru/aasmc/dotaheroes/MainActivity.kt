@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = Screen.HeroListScreen.route,
                     builder = {
                         addHeroList(navController, imageLoader)
-                        addHeroDetails()
+                        addHeroDetails(imageLoader)
                     }
                 )
             }
@@ -67,13 +67,18 @@ fun NavGraphBuilder.addHeroList(
     }
 }
 
-fun NavGraphBuilder.addHeroDetails() {
+fun NavGraphBuilder.addHeroDetails(
+    imageLoader: ImageLoader
+) {
     composable(
         route = Screen.HeroDetailScreen.route + "/{$HERO_ID_ARGUMENT}",
         arguments = Screen.HeroDetailScreen.arguments
     ) { _ ->
         val viewModel: HeroDetailViewModel = hiltViewModel()
-        HeroDetail(state = viewModel.state.value)
+        HeroDetail(
+            state = viewModel.state.value,
+            imageLoader = imageLoader
+        )
     }
 }
 
