@@ -3,8 +3,7 @@ package ru.aasmc.dotaheroes.ui.navigation
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-
-const val HERO_ID_ARGUMENT = "heroId"
+import ru.aasmc.ui_heroDetail.ui.HERO_ID_ARGUMENT
 
 sealed class Screen(
     val route: String,
