@@ -1,5 +1,6 @@
 package ru.aasmc.ui_herolist.ui.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,9 +13,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
 import ru.aasmc.core.domain.ProgressBarState
+import ru.aasmc.core.domain.UiComponentState
 import ru.aasmc.ui_herolist.ui.HeroListEvents
 import ru.aasmc.ui_herolist.ui.HeroListState
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
 fun HeroList(
@@ -36,7 +39,9 @@ fun HeroList(
                 onExecuteSearch = {
                     events(HeroListEvents.FilterHeroesEvent)
                 },
-                onShowFilterDialog = {}
+                onShowFilterDialog = {
+                    events(HeroListEvents.UpdateFilterDialogState(UiComponentState.Show))
+                }
             )
             LazyColumn {
                 items(state.filteredHeroes) { hero ->
@@ -49,6 +54,18 @@ fun HeroList(
                     )
                 }
             }
+        }
+
+        if (state.filterDialogState is UiComponentState.Show) {
+            HeroListFilter(
+                heroFilter = state.heroFilter,
+                onUpdateHeroFilter = { heroFilter ->
+                    events(HeroListEvents.UpdateHeroFilter(heroFilter = heroFilter))
+                },
+                onCloseDialog = {
+                    events(HeroListEvents.UpdateFilterDialogState(UiComponentState.Hide))
+                }
+            )
         }
 
         if (state.progressBarState is ProgressBarState.Loading) {

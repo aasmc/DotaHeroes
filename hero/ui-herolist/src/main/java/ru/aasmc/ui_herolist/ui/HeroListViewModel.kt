@@ -12,6 +12,7 @@ import ru.aasmc.core.domain.DataState
 import ru.aasmc.core.domain.UIComponent
 import ru.aasmc.core.util.Logger
 import ru.aasmc.hero_domain.Hero
+import ru.aasmc.hero_domain.HeroFilter
 import ru.aasmc.hero_interactors.FilterHeroes
 import ru.aasmc.hero_interactors.GetHeroes
 import ru.aasmc.ui_herolist.di.HERO_LIST_LOGGER
@@ -44,7 +45,18 @@ class HeroListViewModel @Inject constructor(
             is HeroListEvents.UpdateHeroNameEvent -> {
                 updateHeroName(heroListEvents.heroName)
             }
+            is HeroListEvents.UpdateHeroFilter -> {
+                updateHeroFilter(heroListEvents.heroFilter)
+            }
+            is HeroListEvents.UpdateFilterDialogState -> {
+                state.value = state.value.copy(filterDialogState = heroListEvents.uiComponentState)
+            }
         }
+    }
+
+    private fun updateHeroFilter(heroFilter: HeroFilter) {
+        state.value = state.value.copy(heroFilter = heroFilter)
+        filterHeroes()
     }
 
     private fun updateHeroName(heroName: String) {

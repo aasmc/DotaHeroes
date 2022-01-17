@@ -64,12 +64,12 @@ class FilterHeroes {
         filter: (Hero) -> T
     ) {
         when (filterOrder) {
-            FilterOrder.Ascending -> {
+            FilterOrder.Descending -> {
                 heroesList.sortByDescending {
                     filter(it)
                 }
             }
-            FilterOrder.Descending -> {
+            FilterOrder.Ascending -> {
                 heroesList.sortBy {
                     filter(it)
                 }
