@@ -6,7 +6,8 @@ import ru.aasmc.hero_datasource.network.HeroService
 
 data class HeroInteractors(
     val getHeroes: GetHeroes,
-    val getHeroFromCache: GetHeroFromCache
+    val getHeroFromCache: GetHeroFromCache,
+    val filterHeroes: FilterHeroes
 ) {
     companion object Factory {
         fun build(
@@ -23,7 +24,8 @@ data class HeroInteractors(
                 ),
                 getHeroFromCache = GetHeroFromCache(
                     cache = cache
-                )
+                ),
+                filterHeroes = FilterHeroes()
             )
         }
 

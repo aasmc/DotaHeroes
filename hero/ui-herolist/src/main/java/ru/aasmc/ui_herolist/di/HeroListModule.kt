@@ -4,7 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.aasmc.core.Logger
+import ru.aasmc.core.util.Logger
+import ru.aasmc.hero_interactors.FilterHeroes
 import ru.aasmc.hero_interactors.GetHeroes
 import ru.aasmc.hero_interactors.HeroInteractors
 import javax.inject.Named
@@ -29,4 +30,31 @@ object HeroListModule {
         return Logger(tag = HERO_LIST_LOGGER, isDebug = true)
     }
 
+    @Provides
+    @Singleton
+    fun provideFilterHeroes(
+        interactors: HeroInteractors
+    ): FilterHeroes {
+        return interactors.filterHeroes
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
