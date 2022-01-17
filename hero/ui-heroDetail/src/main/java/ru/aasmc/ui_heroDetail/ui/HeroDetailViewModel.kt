@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.aasmc.core.DataState
-import ru.aasmc.core.ProgressBarState
+import ru.aasmc.core.domain.DataState
+import ru.aasmc.core.domain.ProgressBarState
 import ru.aasmc.hero_interactors.GetHeroFromCache
 import javax.inject.Inject
 

@@ -7,13 +7,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
-import ru.aasmc.core.ProgressBarState
+import ru.aasmc.core.domain.ProgressBarState
 import ru.aasmc.ui_herolist.ui.HeroListEvents
 import ru.aasmc.ui_herolist.ui.HeroListState
 

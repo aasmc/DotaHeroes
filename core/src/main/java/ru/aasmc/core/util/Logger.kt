@@ -1,4 +1,4 @@
-package ru.aasmc.core
+package ru.aasmc.core.util
 
 class Logger(
     private val tag: String,

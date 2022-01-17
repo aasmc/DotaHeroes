@@ -1,4 +1,4 @@
-package ru.aasmc.core
+package ru.aasmc.core.domain
 
 /**
  * Wrapper class for possible states data can be in.

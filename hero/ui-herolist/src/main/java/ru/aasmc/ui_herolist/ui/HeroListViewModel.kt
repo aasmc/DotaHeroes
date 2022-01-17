@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import ru.aasmc.core.DataState
+import ru.aasmc.core.domain.DataState
 import ru.aasmc.core.Logger
-import ru.aasmc.core.UIComponent
+import ru.aasmc.core.domain.UIComponent
 import ru.aasmc.hero_domain.Hero
 import ru.aasmc.hero_interactors.GetHeroes
 import ru.aasmc.ui_herolist.di.HERO_LIST_LOGGER

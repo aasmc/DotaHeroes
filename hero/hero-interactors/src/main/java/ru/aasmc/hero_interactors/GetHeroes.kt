@@ -2,9 +2,9 @@ package ru.aasmc.hero_interactors
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import ru.aasmc.core.DataState
-import ru.aasmc.core.ProgressBarState
-import ru.aasmc.core.UIComponent
+import ru.aasmc.core.domain.DataState
+import ru.aasmc.core.domain.ProgressBarState
+import ru.aasmc.core.domain.UIComponent
 import ru.aasmc.hero_datasource.cache.HeroCache
 import ru.aasmc.hero_datasource.network.HeroService
 import ru.aasmc.hero_domain.Hero

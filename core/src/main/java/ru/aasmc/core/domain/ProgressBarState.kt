@@ -1,4 +1,4 @@
-package ru.aasmc.core
+package ru.aasmc.core.domain
 
 sealed class ProgressBarState {
     object Loading : ProgressBarState()
