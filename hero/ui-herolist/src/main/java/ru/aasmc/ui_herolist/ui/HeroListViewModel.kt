@@ -51,6 +51,10 @@ class HeroListViewModel @Inject constructor(
             is HeroListEvents.UpdateFilterDialogState -> {
                 state.value = state.value.copy(filterDialogState = heroListEvents.uiComponentState)
             }
+            is HeroListEvents.UpdateAttributeFilter -> {
+                state.value = state.value.copy(primaryAttribute = heroListEvents.attribute)
+                filterHeroes()
+            }
         }
     }
 
