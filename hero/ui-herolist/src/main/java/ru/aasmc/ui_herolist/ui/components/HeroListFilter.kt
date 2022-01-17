@@ -12,6 +12,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +24,7 @@ import ru.aasmc.hero_domain.HeroFilter
 import ru.aasmc.ui_herolist.ui.test.TAG_HERO_FILTER_DIALOG
 import ru.aasmc.ui_herolist.ui.test.TAG_HERO_FILTER_DIALOG_DONE
 import ru.aasmc.ui_herolist.ui.test.TAG_HERO_FILTER_HERO_CHECKBOX
+import ru.aasmc.ui_herolist.ui.test.TAG_HERO_FILTER_PROWINS_CHECKBOX
 
 @ExperimentalAnimationApi
 @Composable
@@ -52,29 +55,83 @@ fun HeroListFilter(
                     ) {
                         // todo replace with spacer if it works correctly
                         EmptyRow()
-
-                        // Hero Filter
-                        HeroListFilterSelector(
-                            filterOnHero = {
+                        // HeroFilter
+                        ListFilterSelector(
+                            filter = {
                                 onUpdateHeroFilter(HeroFilter.HeroOrder())
                             },
                             isEnabled = heroFilter is HeroFilter.HeroOrder,
-                            order = if(heroFilter is HeroFilter.HeroOrder) heroFilter.order else null,
-                            orderDesc = {
-                                onUpdateHeroFilter(
-                                    HeroFilter.HeroOrder(
-                                        order = FilterOrder.Descending
+                            label = HeroFilter.HeroOrder().uiValue,
+                            modifier = Modifier
+                                .testTag(TAG_HERO_FILTER_HERO_CHECKBOX)
+                        ) {
+                            val enabled: Boolean =
+                                heroFilter is HeroFilter.HeroOrder
+
+                            val order =
+                                if(heroFilter is HeroFilter.HeroOrder) heroFilter.order else null
+
+                            OrderSelector(
+                                descString = "z -> a",
+                                ascString = "a -> z",
+                                isEnabled = enabled,
+                                isDescSelected = enabled &&  order is FilterOrder.Descending,
+                                isAscSelected = enabled && order is FilterOrder.Ascending,
+                                onUpdateHeroFilterDesc = {
+                                    onUpdateHeroFilter(
+                                        HeroFilter.HeroOrder(
+                                            order = FilterOrder.Descending
+                                        )
                                     )
-                                )
+                                },
+                                onUpdateHeroFilterAsc = {
+                                    onUpdateHeroFilter(
+                                        HeroFilter.HeroOrder(
+                                            order = FilterOrder.Ascending
+                                        )
+                                    )
+                                }
+                            )
+                        }
+
+                        // Pro Win Filter
+                        ListFilterSelector(
+                            filter = {
+                                onUpdateHeroFilter(HeroFilter.ProWins())
                             },
-                            orderAsc = {
-                                onUpdateHeroFilter(
-                                    HeroFilter.HeroOrder(
-                                        order = FilterOrder.Ascending
+                            isEnabled = heroFilter is HeroFilter.ProWins,
+                            label = HeroFilter.ProWins().uiValue,
+                            modifier = Modifier
+                                .testTag(TAG_HERO_FILTER_PROWINS_CHECKBOX)
+                        ) {
+                            val enabled: Boolean =
+                                heroFilter is HeroFilter.ProWins
+
+                            val order =
+                                if(heroFilter is HeroFilter.ProWins) heroFilter.order else null
+
+                            OrderSelector(
+                                descString = "100% - 0%",
+                                ascString = "0% - 100%",
+                                isEnabled = enabled,
+                                isDescSelected = enabled &&  order is FilterOrder.Descending,
+                                isAscSelected = enabled && order is FilterOrder.Ascending,
+                                onUpdateHeroFilterDesc = {
+                                    onUpdateHeroFilter(
+                                        HeroFilter.ProWins(
+                                            order = FilterOrder.Descending
+                                        )
                                     )
-                                )
-                            }
-                        )
+                                },
+                                onUpdateHeroFilterAsc = {
+                                    onUpdateHeroFilter(
+                                        HeroFilter.ProWins(
+                                            order = FilterOrder.Ascending
+                                        )
+                                    )
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -108,28 +165,27 @@ fun HeroListFilter(
 
 @ExperimentalAnimationApi
 @Composable
-fun HeroListFilterSelector(
-    filterOnHero: () -> Unit,
+fun ListFilterSelector(
+    modifier: Modifier = Modifier,
+    label: String,
+    filter: () -> Unit,
     isEnabled: Boolean,
-    order: FilterOrder? = null,
-    orderDesc: () -> Unit,
-    orderAsc: () -> Unit
+    orderSelector: @Composable () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(bottom = 12.dp)
-                .testTag(TAG_HERO_FILTER_HERO_CHECKBOX)
                 .clickable(
                     interactionSource = MutableInteractionSource(),
                     indication = null, // disable the highlight
                     enabled = true,
                     onClick = {
-                        filterOnHero()
+                        filter()
                     }
                 )
         ) {
@@ -139,31 +195,19 @@ fun HeroListFilterSelector(
                     .align(Alignment.CenterVertically),
                 checked = isEnabled,
                 onCheckedChange = {
-                    filterOnHero()
+                    filter()
                 },
                 colors = CheckboxDefaults.colors(MaterialTheme.colors.primary)
             )
             Text(
-                text = HeroFilter.HeroOrder().uiValue,
+                text = label,
                 style = MaterialTheme.typography.h3
             )
         }
-        OrderSelector(
-            descString = "z -> a",
-            ascString = "a -> z",
-            isEnabled = isEnabled,
-            isDescSelected = isEnabled && order is FilterOrder.Descending,
-            isAscSelected = isEnabled && order is FilterOrder.Ascending,
-            onUpdateHeroFilterDesc = {
-                orderDesc()
-            },
-            onUpdateHeroFilterAsc = {
-                orderAsc()
-            }
-        )
+        orderSelector()
     }
-
 }
+
 
 
 
