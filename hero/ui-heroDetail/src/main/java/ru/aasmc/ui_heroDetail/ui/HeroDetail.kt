@@ -108,201 +108,215 @@ fun HeroDetail(
                             padding = 10.dp,
                         )
                         Spacer(modifier = Modifier.height(12.dp))
-                        WinPercentage(hero = hero,)
+                        WinPercentages(hero = hero,)
                     }
                 }
             }
         }
     }
 }
-// TODO extract common code to separate functions
+
+/**
+ * Displays Pro wins % and Turbo wins %
+ */
 @Composable
-fun WinPercentage(
-    hero: Hero
-) {
+fun WinPercentages(
+    hero: Hero,
+){
     Row(
         modifier = Modifier
             .fillMaxWidth()
-    ) {
-        // Pro win %
+    ){
+        // Pro Win %
         Column(
-            modifier = Modifier
-                .fillMaxWidth(0.5f),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            modifier = Modifier.fillMaxWidth(.5f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
             Text(
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .align(Alignment.CenterHorizontally),
+                    .align(Alignment.CenterHorizontally)
+                ,
                 text = "Pro Wins",
-                style = MaterialTheme.typography.h2
+                style = MaterialTheme.typography.h2,
             )
-            val proWinPercentage = remember {
-                round(hero.proWins.toDouble() / hero.proPick.toDouble() * 100).toInt()
-            }
+            val proWinPercentage = remember {round(hero.proWins.toDouble() / hero.proPick.toDouble() * 100).toInt()}
             Text(
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .align(Alignment.CenterHorizontally),
+                    .align(Alignment.CenterHorizontally)
+                ,
                 text = "$proWinPercentage %",
                 style = MaterialTheme.typography.h2,
-                color = if (proWinPercentage > 50) Color(0xFF009a34) else MaterialTheme.colors.error
+                color = if(proWinPercentage > 50) Color(0xFF009a34) else MaterialTheme.colors.error
             )
         }
         // Turbo win %
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        ){
             Text(
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .align(Alignment.CenterHorizontally),
+                    .align(Alignment.CenterHorizontally)
+                ,
                 text = "Turbo Wins",
                 style = MaterialTheme.typography.h2,
             )
-            val turboWinPercentage =
-                remember { round(hero.turboWins.toDouble() / hero.turboPicks.toDouble() * 100).toInt() }
+            val turboWinPercentage = remember {round(hero.turboWins.toDouble() / hero.turboPicks.toDouble() * 100).toInt()}
             Text(
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .align(Alignment.CenterHorizontally),
-                text = "${turboWinPercentage} %",
+                    .align(Alignment.CenterHorizontally)
+                ,
+                text = "$turboWinPercentage %",
                 style = MaterialTheme.typography.h2,
-                color = if (turboWinPercentage > 50) Color(0xFF009a34) else MaterialTheme.colors.error
+                color = if(turboWinPercentage > 50) Color(0xFF009a34) else MaterialTheme.colors.error
             )
         }
     }
 }
 
-// TODO extract common code to separate functions
 @Composable
 fun HeroBaseStats(
     hero: Hero,
-    padding: Dp
-) {
+    padding: Dp,
+){
     Surface(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+        ,
         elevation = 8.dp,
         shape = MaterialTheme.shapes.medium
-    ) {
+    ){
         Column(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(padding)
+            ,
         ) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 8.dp),
+                    .padding(bottom = 8.dp)
+                ,
                 text = "Base Stats",
-                style = MaterialTheme.typography.h4
+                style = MaterialTheme.typography.h4,
             )
             Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
+                modifier = Modifier
+                    .fillMaxWidth()
+            ){
                 Column(
                     modifier = Modifier
                         .fillMaxWidth(0.5f)
                         .padding(end = 20.dp)
-                ) { // Str, Agi, Int, Health
-                    Row( // Str
+                ){ // Str, Agi, Int, Health
+                    Row( // STR
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 8.dp),
+                            .padding(bottom = 8.dp)
+                        ,
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
-                            text = "${hero.baseStr}",
-                            style = MaterialTheme.typography.body2
-                        )
-                        Text(
-                            text = " + ${hero.strGain}",
-                            style = MaterialTheme.typography.caption
-                        )
-                    }
-
-                    Row( // Agi
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 8.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = "${stringResource(id = R.string.agility)}:",
-                            style = MaterialTheme.typography.body2
+                            text = "${stringResource(R.string.strength)}:",
+                            style = MaterialTheme.typography.body2,
                         )
                         Row {
                             Text(
+                                text = "${hero.baseStr}",
+                                style = MaterialTheme.typography.body2,
+                            )
+                            Text(
+                                text = " + ${hero.strGain}",
+                                style = MaterialTheme.typography.caption,
+                            )
+                        }
+                    }
+                    Row( // AGI
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
+                        ,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ){
+                        Text(
+                            text = "${stringResource(R.string.agility)}:",
+                            style = MaterialTheme.typography.body2,
+                        )
+                        Row{
+                            Text(
                                 text = "${hero.baseAgi}",
-                                style = MaterialTheme.typography.body2
+                                style = MaterialTheme.typography.body2,
                             )
                             Text(
                                 text = " + ${hero.agiGain}",
-                                style = MaterialTheme.typography.caption
+                                style = MaterialTheme.typography.caption,
                             )
                         }
                     }
                     Row( // INT
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 8.dp),
+                            .padding(bottom = 8.dp)
+                        ,
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
-                            text = "${stringResource(id = R.string.intelligence)}:",
-                            style = MaterialTheme.typography.body2
+                            text = "${stringResource(R.string.intelligence)}:",
+                            style = MaterialTheme.typography.body2,
                         )
-                        Row {
+                        Row{
                             Text(
                                 text = "${hero.baseInt}",
-                                style = MaterialTheme.typography.body2
+                                style = MaterialTheme.typography.body2,
                             )
                             Text(
                                 text = " + ${hero.intGain}",
-                                style = MaterialTheme.typography.caption
+                                style = MaterialTheme.typography.caption,
                             )
                         }
                     }
                     Row( // HP
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(bottom = 8.dp),
+                            .padding(bottom = 8.dp)
+                        ,
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
-                            text = "${stringResource(id = R.string.health)}:",
-                            style = MaterialTheme.typography.body2
+                            text = "${stringResource(R.string.health)}:",
+                            style = MaterialTheme.typography.body2,
                         )
-                        val health = remember {
-                            round(hero.baseHealth + hero.baseStr * 20).toInt()
-                        }
+                        val health = remember{round(hero.baseHealth + hero.baseStr * 20).toInt()}
                         Text(
                             text = "$health",
-                            style = MaterialTheme.typography.body2
+                            style = MaterialTheme.typography.body2,
                         )
                     }
                 }
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                ) { // Atk Range, proj speed, move speed, atk dmg
+                ){ // Atk Range, proj speed, move speed, atk dmg
                     Row( // Atk Range
                         modifier = Modifier
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${stringResource(R.string.attack_range)}:",
                             style = MaterialTheme.typography.body2,
                         )
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${hero.attackRange}",
                             style = MaterialTheme.typography.body2,
                         )
@@ -311,16 +325,18 @@ fun HeroBaseStats(
                         modifier = Modifier
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${stringResource(R.string.projectile_speed)}:",
                             style = MaterialTheme.typography.body2,
                         )
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${hero.projectileSpeed}",
                             style = MaterialTheme.typography.body2,
                         )
@@ -329,16 +345,18 @@ fun HeroBaseStats(
                         modifier = Modifier
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${stringResource(R.string.move_speed)}:",
                             style = MaterialTheme.typography.body2,
                         )
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${hero.moveSpeed}",
                             style = MaterialTheme.typography.body2,
                         )
@@ -347,19 +365,21 @@ fun HeroBaseStats(
                         modifier = Modifier
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
+                    ){
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
+                                .padding(bottom = 8.dp)
+                            ,
                             text = "${stringResource(R.string.attack_dmg)}:",
                             style = MaterialTheme.typography.body2,
                         )
-                        val atkMin = remember { hero.minAttackDmg() }
-                        val atkMax = remember { hero.maxAttackDmg() }
+                        val atkMin = remember{hero.minAttackDmg()}
+                        val atkMax = remember{hero.maxAttackDmg()}
                         Text(
                             modifier = Modifier
-                                .padding(bottom = 8.dp),
-                            text = "${atkMin} - ${atkMax}",
+                                .padding(bottom = 8.dp)
+                            ,
+                            text = "$atkMin - $atkMax",
                             style = MaterialTheme.typography.body2,
                         )
                     }
@@ -368,7 +388,6 @@ fun HeroBaseStats(
         }
     }
 }
-
 
 
 

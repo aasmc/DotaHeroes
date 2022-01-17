@@ -1,4 +1,4 @@
-package ru.aasmc.ui_herolist.ui.ui
+package ru.aasmc.ui_herolist.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

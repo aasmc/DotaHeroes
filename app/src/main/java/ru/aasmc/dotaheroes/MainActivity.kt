@@ -3,6 +3,7 @@ package ru.aasmc.dotaheroes
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -16,10 +17,11 @@ import ru.aasmc.dotaheroes.ui.theme.DotaHeroesTheme
 import ru.aasmc.ui_heroDetail.ui.HERO_ID_ARGUMENT
 import ru.aasmc.ui_heroDetail.ui.HeroDetail
 import ru.aasmc.ui_heroDetail.ui.HeroDetailViewModel
-import ru.aasmc.ui_herolist.HeroList
+import ru.aasmc.ui_herolist.ui.components.HeroList
 import ru.aasmc.ui_herolist.ui.HeroListViewModel
 import javax.inject.Inject
 
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -46,6 +48,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalComposeUiApi
 fun NavGraphBuilder.addHeroList(
     navController: NavController,
     imageLoader: ImageLoader
