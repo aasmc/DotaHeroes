@@ -5,5 +5,7 @@ import ru.aasmc.hero_domain.Hero
 
 data class HeroListState(
     val progressBarState: ProgressBarState = ProgressBarState.Idle,
-    val heroes: List<Hero> = emptyList()
+    val heroes: List<Hero> = emptyList(),
+    val filteredHeroes: List<Hero> = emptyList(),
+    val heroName: String = ""
 )

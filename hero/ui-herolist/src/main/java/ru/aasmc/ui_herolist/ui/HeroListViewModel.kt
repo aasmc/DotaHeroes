@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.aasmc.core.DataState
 import ru.aasmc.core.Logger
 import ru.aasmc.core.UIComponent
+import ru.aasmc.hero_domain.Hero
 import ru.aasmc.hero_interactors.GetHeroes
 import ru.aasmc.ui_herolist.di.HERO_LIST_LOGGER
 import javax.inject.Inject
@@ -32,10 +33,27 @@ class HeroListViewModel @Inject constructor(
 
     fun onTriggerEvent(heroListEvents: HeroListEvents) {
         when (heroListEvents) {
-            HeroListEvents.GetHeroesEvent -> {
+            is HeroListEvents.GetHeroesEvent -> {
                 getHeroes()
             }
+            is HeroListEvents.FilterHeroesEvent -> {
+                filterHeroes()
+            }
+            is HeroListEvents.UpdateHeroNameEvent -> {
+                updateHeroName(heroListEvents.heroName)
+            }
         }
+    }
+
+    private fun updateHeroName(heroName: String) {
+        state.value = state.value.copy(heroName = heroName)
+    }
+
+    private fun filterHeroes() {
+        val filteredHeroes: MutableList<Hero> = state.value.heroes.filter {
+            it.localizedName.lowercase().contains(state.value.heroName.lowercase())
+        }.toMutableList()
+        state.value = state.value.copy(filteredHeroes = filteredHeroes)
     }
 
     private fun getHeroes() {
@@ -53,6 +71,7 @@ class HeroListViewModel @Inject constructor(
                 }
                 is DataState.Data -> {
                     state.value = state.value.copy(heroes = dataState.data ?: emptyList())
+                    filterHeroes()
                 }
                 is DataState.Loading -> {
                     state.value = state.value.copy(progressBarState = dataState.progressBarState)

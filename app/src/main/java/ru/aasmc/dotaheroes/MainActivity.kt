@@ -60,6 +60,7 @@ fun NavGraphBuilder.addHeroList(
         val viewModel: HeroListViewModel = hiltViewModel()
         HeroList(
             state = viewModel.state.value,
+            events = viewModel::onTriggerEvent,
             imageLoader = imageLoader,
             navigateToDetailScreen = { heroId ->
                 navController.navigate(

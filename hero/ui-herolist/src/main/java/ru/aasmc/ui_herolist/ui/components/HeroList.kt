@@ -14,12 +14,14 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
 import ru.aasmc.core.ProgressBarState
+import ru.aasmc.ui_herolist.ui.HeroListEvents
 import ru.aasmc.ui_herolist.ui.HeroListState
 
 @ExperimentalComposeUiApi
 @Composable
 fun HeroList(
     state: HeroListState,
+    events: (HeroListEvents) -> Unit,
     imageLoader: ImageLoader,
     navigateToDetailScreen: (Int) -> Unit
 ) {
@@ -28,21 +30,18 @@ fun HeroList(
     ) {
 
         Column {
-            val name = remember {
-                mutableStateOf("")
-            }
             HeroListToolbar(
-                heroName = name.value,
+                heroName = state.heroName,
                 onHeroNameChanged = { heroName ->
-                    name.value = heroName
+                    events(HeroListEvents.UpdateHeroNameEvent(heroName = heroName))
                 },
                 onExecuteSearch = {
-
+                    events(HeroListEvents.FilterHeroesEvent)
                 },
                 onShowFilterDialog = {}
             )
             LazyColumn {
-                items(state.heroes) { hero ->
+                items(state.filteredHeroes) { hero ->
                     HeroListItem(
                         hero = hero,
                         imageLoader = imageLoader,
