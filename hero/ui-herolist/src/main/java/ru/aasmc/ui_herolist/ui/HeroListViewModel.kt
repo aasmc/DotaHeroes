@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.aasmc.core.domain.DataState
+import ru.aasmc.core.domain.Queue
 import ru.aasmc.core.domain.UIComponent
 import ru.aasmc.core.util.Logger
 import ru.aasmc.hero_domain.Hero
@@ -83,7 +84,7 @@ class HeroListViewModel @Inject constructor(
                 is DataState.Response -> {
                     when (dataState.uiComponent) {
                         is UIComponent.Dialog -> {
-                            logger.log((dataState.uiComponent as UIComponent.Dialog).description)
+                            appendToErrorQueue(dataState.uiComponent)
                         }
                         is UIComponent.None -> {
                             logger.log((dataState.uiComponent as UIComponent.None).message)
@@ -99,6 +100,14 @@ class HeroListViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun appendToErrorQueue(uiComponent: UIComponent) {
+        val queue = state.value.errorQueue
+        queue.add(uiComponent)
+        // todo consider removing this workaround to force recomposition
+        state.value = state.value.copy(errorQueue = Queue(mutableListOf())) // force recompose
+        state.value = state.value.copy(errorQueue = queue)
     }
 
 }
