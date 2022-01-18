@@ -46,7 +46,7 @@ class HeroDetailViewModel @Inject constructor(
                         state.value = state.value.copy(hero = dataState.data)
                     }
                     is DataState.Loading -> {
-                        state.value = state.value.copy(progressBarState = ProgressBarState.Loading)
+                        state.value = state.value.copy(progressBarState = dataState.progressBarState)
                     }
                     is DataState.Response -> {
                         // TODO Handle errors

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import coil.ImageLoader
+import ru.aasmc.components.DefaultScreenUi
 import ru.aasmc.core.domain.ProgressBarState
 import ru.aasmc.core.domain.UiComponentState
 import ru.aasmc.ui_herolist.ui.HeroListEvents
@@ -26,10 +27,9 @@ fun HeroList(
     imageLoader: ImageLoader,
     navigateToDetailScreen: (Int) -> Unit
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
+    DefaultScreenUi(
+        progressBarState = state.progressBarState
     ) {
-
         Column {
             HeroListToolbar(
                 heroName = state.heroName,
@@ -69,12 +69,6 @@ fun HeroList(
                 onCloseDialog = {
                     events(HeroListEvents.UpdateFilterDialogState(UiComponentState.Hide))
                 }
-            )
-        }
-
-        if (state.progressBarState is ProgressBarState.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
             )
         }
     }
