@@ -1,6 +1,8 @@
 package ru.aasmc.ui_herolist.ui
 
 import ru.aasmc.core.domain.ProgressBarState
+import ru.aasmc.core.domain.Queue
+import ru.aasmc.core.domain.UIComponent
 import ru.aasmc.core.domain.UiComponentState
 import ru.aasmc.hero_domain.Hero
 import ru.aasmc.hero_domain.HeroAttribute
@@ -13,5 +15,6 @@ data class HeroListState(
     val heroName: String = "",
     val heroFilter: HeroFilter = HeroFilter.HeroOrder(),
     val primaryAttribute: HeroAttribute = HeroAttribute.Unknown,
-    val filterDialogState: UiComponentState = UiComponentState.Hide
+    val filterDialogState: UiComponentState = UiComponentState.Hide,
+    val errorQueue: Queue<UIComponent> = Queue(mutableListOf())
 )
