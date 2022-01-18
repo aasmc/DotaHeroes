@@ -28,6 +28,10 @@ fun HeroList(
     navigateToDetailScreen: (Int) -> Unit
 ) {
     DefaultScreenUi(
+        queue = state.errorQueue,
+        onRemoveHeadFromQueue = {
+             events(HeroListEvents.OnRemoveHeadFromQueue)
+        },
         progressBarState = state.progressBarState
     ) {
         Column {

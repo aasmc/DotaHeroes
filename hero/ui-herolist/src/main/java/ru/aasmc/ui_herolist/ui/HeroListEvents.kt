@@ -25,4 +25,6 @@ sealed class HeroListEvents {
     data class UpdateFilterDialogState(
         val uiComponentState: UiComponentState
     ): HeroListEvents()
+
+    object OnRemoveHeadFromQueue : HeroListEvents()
 }

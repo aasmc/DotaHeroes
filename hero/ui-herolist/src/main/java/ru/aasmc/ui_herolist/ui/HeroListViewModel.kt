@@ -56,6 +56,21 @@ class HeroListViewModel @Inject constructor(
                 state.value = state.value.copy(primaryAttribute = heroListEvents.attribute)
                 filterHeroes()
             }
+            is HeroListEvents.OnRemoveHeadFromQueue -> {
+                removeErrorMessageFromQueue()
+            }
+        }
+    }
+
+    private fun removeErrorMessageFromQueue() {
+        try {
+            val queue = state.value.errorQueue
+            queue.remove()
+
+            state.value = state.value.copy(errorQueue = Queue(mutableListOf())) // force recompose
+            state.value = state.value.copy(errorQueue = queue)
+        } catch (e: Exception) {
+            logger.log("Nothing to remove from DialogQueue")
         }
     }
 

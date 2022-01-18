@@ -41,6 +41,21 @@ class HeroDetailViewModel @Inject constructor(
             is HeroDetailEvents.GetHeroFromCacheEvent -> {
                 getHeroFromCache(events.id)
             }
+            is HeroDetailEvents.OnRemoveHeadFromQueue -> {
+                removeErrorMessageFromQueue()
+            }
+        }
+    }
+
+    private fun removeErrorMessageFromQueue() {
+        try {
+            val queue = state.value.errorQueue
+            queue.remove()
+
+            state.value = state.value.copy(errorQueue = Queue(mutableListOf())) // force recompose
+            state.value = state.value.copy(errorQueue = queue)
+        } catch (e: Exception) {
+            logger.log("Nothing to remove from DialogQueue")
         }
     }
 

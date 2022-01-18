@@ -32,9 +32,14 @@ const val HERO_ID_ARGUMENT = "heroId"
 fun HeroDetail(
     state: HeroDetailState,
     imageLoader: ImageLoader,
+    events: (HeroDetailEvents) -> Unit
 ) {
 
     DefaultScreenUi(
+        queue = state.errorQueue,
+        onRemoveHeadFromQueue = {
+            events(HeroDetailEvents.OnRemoveHeadFromQueue)
+        },
         progressBarState = state.progressBarState
     ) {
 

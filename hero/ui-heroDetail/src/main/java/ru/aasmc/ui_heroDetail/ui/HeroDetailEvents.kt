@@ -4,4 +4,6 @@ sealed class HeroDetailEvents {
     data class GetHeroFromCacheEvent(
         val id: Int
     ) : HeroDetailEvents()
+
+    object OnRemoveHeadFromQueue: HeroDetailEvents()
 }

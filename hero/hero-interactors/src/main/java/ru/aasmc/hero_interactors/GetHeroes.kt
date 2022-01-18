@@ -47,7 +47,6 @@ class GetHeroes(
             emit(
                 DataState.Data(cachedHeroes)
             )
-
         } catch (e: Exception) {
             e.printStackTrace()
             emit(
