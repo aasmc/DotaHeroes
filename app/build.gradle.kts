@@ -17,7 +17,7 @@ android {
         targetSdk = Android.targetSdk
         versionCode = Android.versionCode
         versionName = Android.versionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "ru.aasmc.dotaheroes.CustomTestRunner"
     }
 
     buildTypes {
@@ -50,6 +50,8 @@ dependencies{
     implementation(project(Modules.heroInteractors))
     implementation(project(Modules.ui_heroList))
     implementation(project(Modules.ui_heroDetail))
+    implementation(project(Modules.heroDataSource))
+    implementation(project(Modules.heroDataSourceTest))
 
     implementation(Accompanist.animations)
     implementation(AndroidX.coreKtx)
@@ -71,4 +73,13 @@ dependencies{
     kapt(Hilt.compiler)
 
     implementation(SqlDelight.androidDriver)
+
+    androidTestImplementation(project(Modules.heroDataSourceTest))
+    androidTestImplementation(AndroidXTest.runner)
+    androidTestImplementation(ComposeTest.uiTestJunit4)
+    androidTestImplementation(HiltTest.hiltAndroidTesting)
+    kaptAndroidTest(Hilt.compiler)
+    androidTestImplementation(Junit.junit4)
+    // need this dependency to solve activity exported error on Android 12 and higher
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
 }
