@@ -18,7 +18,7 @@ import kotlin.math.round
  * 7. Success (Filter by 'HeroAttribute' "Agility")
  * 8. Success (Filter by 'HeroAttribute' "Intelligence")
  */
-class FilterHerosTest {
+class FilterHeroesTest {
 
     // System in test
     private lateinit var filterHeros: FilterHeroes
