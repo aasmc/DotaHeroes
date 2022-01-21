@@ -15,4 +15,11 @@ dependencies {
 
 
     "implementation"(SqlDelight.androidDriver)
+
+    "androidTestImplementation"(project(Modules.heroDataSourceTest))
+    "androidTestImplementation"(ComposeTest.uiTestJunit4)
+    "debugImplementation"(ComposeTest.uiTestManifest)
+    "androidTestImplementation"(Junit.junit4)
+    // need this dependency to solve activity exported error on Android 12 and higher
+    "androidTestImplementation"("androidx.test.ext:junit:1.1.3")
 }
